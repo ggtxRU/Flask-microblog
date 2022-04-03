@@ -1,0 +1,34 @@
+2022-04-03 17:09:33,408 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:14:09,927 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:14:39,220 ERROR: Exception on /edit_profile [POST] [in /home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py:1455]
+Traceback (most recent call last):
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1526, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1545, in finalize_request
+    response = self.make_response(rv)
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1701, in make_response
+    raise TypeError(
+TypeError: The view function for 'edit_profile' did not return a valid response. The function either returned None or ended without a return statement.
+2022-04-03 17:21:41,797 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:21:47,364 ERROR: Exception on /edit_profile [POST] [in /home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py:1455]
+Traceback (most recent call last):
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1526, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1545, in finalize_request
+    response = self.make_response(rv)
+  File "/home/mrprogg/flask/microblog1/env/lib/python3.8/site-packages/flask/app.py", line 1701, in make_response
+    raise TypeError(
+TypeError: The view function for 'edit_profile' did not return a valid response. The function either returned None or ended without a return statement.
+2022-04-03 17:22:52,152 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:29:05,331 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:31:48,361 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-03 17:35:17,798 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-04 00:30:04,226 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-04 00:31:22,975 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-04 00:31:43,856 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-04 00:34:01,490 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-04 00:40:09,880 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
