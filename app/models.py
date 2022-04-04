@@ -13,6 +13,7 @@ followers = db.Table(
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
 
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -24,8 +25,8 @@ class User(UserMixin, db.Model):
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
-        secondaryjoin = (followers.c.followed_id == id),
-        backref = db.backref('followers', lazy='dynamic'),lazy='dynamic')
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -36,7 +37,7 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def avatar(self,size):
+    def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size)
@@ -45,21 +46,23 @@ class User(UserMixin, db.Model):
         if not self.is_following(user):
             self.followed.append(user)
 
-
-    def unfollow(self,user):
+    def unfollow(self, user):
         if self.is_following(user):
             self.followed.remove(user)
 
     def is_following(self, user):
-        """Формируем запрос на проверку отношения, существует ли связь между двумя пользователями"""
+        """Формируем запрос на проверку отношения, существует ли связь между
+        двумя пользователями."""
         return self.followed.filter(
-        followers.c.followed_id == user.id).count() > 0
+            followers.c.followed_id == user.id).count() > 0
 
     def followed_posts(self):
-        """Функция поиска последних сообщений пользователей, на которых подписан данный (followed) пользователь.
+        """Функция поиска последних сообщений пользователей, на которых
+        подписан данный (followed) пользователь.
+
         :Общая структура запроса: Post.query.join(...).filter(...).order_by(...)
         :join: вызываем операцию join в таблице posts, этим вызовом формируем запрос, чтобы база данных создавала временную таблицу, которая объединяет данные из таблиц posts и followers. Условие в том, что поле followed_id таблицы followers должно быть равно user_id таблицы posts.
-        :filter: после того, как операция join дала мне список всех сообщений, за которыми следит какой-то пользователь, я обрезаю этот список методом filter(), чтобы получить результат выполнения для одного отдельно взятого пользователя (по идентифатору пользователя self.id) --> другими словами, сохраняем только те записи, в которых наш пользователь является подписчиком 
+        :filter: после того, как операция join дала мне список всех сообщений, за которыми следит какой-то пользователь, я обрезаю этот список методом filter(), чтобы получить результат выполнения для одного отдельно взятого пользователя (по идентифатору пользователя self.id) --> другими словами, сохраняем только те записи, в которых наш пользователь является подписчиком
         """
         followed = Post.query.join(
             followers, (followers.c.followed_id == Post.user_id)).filter(
@@ -68,8 +71,6 @@ class User(UserMixin, db.Model):
         own = Post.query.filter_by(user_id=self.id)
         """Объединяем два списка и отсортировываем результаты в порядке убывания. При таком условии первым результатом будет самый последний пост в блоге."""
         return followed.union(own).order_by(Post.timestamp.desc())
-            
-        
 
 
 class Post(db.Model):

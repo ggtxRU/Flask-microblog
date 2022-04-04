@@ -31,3 +31,4 @@ Traceback (most recent call last):
 jinja2.exceptions.UndefinedError: 'form' is undefined
 2022-04-05 01:38:57,616 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
 2022-04-05 01:40:50,123 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
+2022-04-05 02:05:59,294 INFO: Microblog startup [in /home/mrprogg/flask/microblog1/app/__init__.py:43]
