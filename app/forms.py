@@ -50,3 +50,8 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError('Please use a different username!')
+
+class PostForm(FlaskForm):
+    """Форма, в которой пользователи могут добавлять новые сообщения на своих страницах"""
+    post = TextAreaField('Что нового?', validators=[DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Отправить')
