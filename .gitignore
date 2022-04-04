@@ -3,6 +3,7 @@ env
 *.egg
 *.egg-info
 dist
+logs
 build
 eggs
 parts
@@ -14,3 +15,7 @@ develop-eggs
 lib
 lib64
 __pycache__
+pip-log.txt
+.coverage
+.tox
+nosetests.xml
