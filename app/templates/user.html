@@ -24,4 +24,10 @@
     {% include '_post.html' %} 
     </table>
     {% endfor %}
+    {% if prev_url %}
+        <a href="{{ prev_url }}">Показать более новые сообщения</a>
+        {% endif %}
+        {% if next_url %}
+        <a href="{{ next_url }}">Показать более старые сообщения</a>
+        {% endif %}
 {% endblock %}
