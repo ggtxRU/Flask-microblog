@@ -1,11 +1,12 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, Config
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.email import send_password_reset_email
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, RegisterMessageForm
+from app.email import send_password_reset_email, register_hello_message
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
+import random
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -68,6 +69,12 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """Маршрут регистрации нового пользователя
+    Проверяем, что пользователь не вошел в систему, в противном случае ->\
+        перенаправляем на индексную страницу
+    Если пользователь ввел данные в форму, данные провалидированы и действительны ->\
+        забираем данные из формы, создаем нового пользователя, отправляем привественное сообщение на email
+    """
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -76,10 +83,13 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            register_hello_message(user, password=form.password.data)
         flash('Вы успешно зарегистрировались.')
+        flash('Проверьте ваш почтовый ящик.')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
-
 
 @app.route('/user/<username>')
 @login_required

@@ -76,3 +76,10 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Новый пароль', validators=[DataRequired()])
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Изменить пароль')
+
+
+class RegisterMessageForm(FlaskForm):
+    """Форма отправки смс подтвержждения на электронную почту при регистрации"""
+    key = StringField('Введите код подтверждения', validators=[
+                                                        DataRequired(), Length(min=1, max=4)])
+    submit = SubmitField('Подтвердить')
