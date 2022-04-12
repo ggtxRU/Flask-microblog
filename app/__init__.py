@@ -1,3 +1,5 @@
+from ensurepip import bootstrap
+from re import M
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -7,6 +9,10 @@ from flask_mail import Mail
 import logging
 from logging.handlers import  SMTPHandler, RotatingFileHandler
 import os
+from flask_moment import Moment
+from flask_bootstrap import Bootstrap
+
+#-*- coding: utf-8 -*-
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,7 +20,10 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message = "Войдите, чтобы увидеть эту страницу."
 mail = Mail(app)
+moment = Moment(app)
+bootstrap = Bootstrap(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:

@@ -25,6 +25,15 @@ def send_password_reset_email(user):
     """Фунция генерации токена и отправки сообщения на email"""
     token = user.get_reset_password_token()
     send_mail('[Microblog] Reset Your Password', 
-            sender=app.config['ADMINS'][0],
+            # sender=app.config['ADMINS'][0],
+            sender = 'no-reply',
             recipients=[user.email],
             html_body=render_template('email/reset_password.html', user=user, token=token))
+
+def register_hello_message(user,password):
+    """Функция отправки приветственного сообщения пользователю после успешной регистрации"""
+    send_mail('[Microblog] Hi!', 
+            # sender=app.config['ADMINS'][0],
+            sender = 'no-reply',
+            recipients=[user.email],
+            html_body=render_template('email/hello_message.html', user=user, password=password))
